@@ -24,23 +24,23 @@
   {
     "id": "case_2",
     "tool_match": true,
-    "fact_score": 0.0,
+    "fact_score": 1.0,
     "details": {
       "results": [
         {
           "fact": "$50,000 per day",
-          "status": "Fail"
+          "status": "Pass"
         },
         {
           "fact": "High-value clients",
-          "status": "Fail"
+          "status": "Pass"
         },
         {
           "fact": "$250,000",
-          "status": "Fail"
+          "status": "Pass"
         }
       ],
-      "score": 0.0
+      "score": 1.0
     }
   },
   {
