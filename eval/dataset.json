@@ -1,0 +1,50 @@
+[
+    {
+        "id": "case_1",
+        "query": "What is the balance of account ACC-123?",
+        "expected_tools": [
+            "account_lookup"
+        ],
+        "expected_facts": [
+            "$15,000.00",
+            "Alice Smith",
+            "Checking"
+        ]
+    },
+    {
+        "id": "case_2",
+        "query": "Find KB articles about wire transfers.",
+        "expected_tools": [
+            "kb_search"
+        ],
+        "expected_facts": [
+            "$50,000 per day",
+            "High-value clients",
+            "$250,000"
+        ]
+    },
+    {
+        "id": "case_3",
+        "query": "Check CRM notes for Bob Jones and see what account type he has (ACC-456).",
+        "expected_tools": [
+            "crm_notes",
+            "account_lookup"
+        ],
+        "expected_facts": [
+            "Saving for a new car",
+            "Savings",
+            "$2,500.50"
+        ]
+    },
+    {
+        "id": "case_4",
+        "query": "What is the balance of non-existent account ACC-999?",
+        "expected_tools": [
+            "account_lookup"
+        ],
+        "expected_facts": [
+            "not found",
+            "ACC-999"
+        ]
+    }
+]

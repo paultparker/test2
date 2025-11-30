@@ -1,0 +1,86 @@
+[
+  {
+    "id": "case_1",
+    "tool_match": true,
+    "fact_score": 1.0,
+    "details": {
+      "results": [
+        {
+          "fact": "$15,000.00",
+          "status": "Pass"
+        },
+        {
+          "fact": "Alice Smith",
+          "status": "Pass"
+        },
+        {
+          "fact": "Checking",
+          "status": "Pass"
+        }
+      ],
+      "score": 1.0
+    }
+  },
+  {
+    "id": "case_2",
+    "tool_match": true,
+    "fact_score": 0.0,
+    "details": {
+      "results": [
+        {
+          "fact": "$50,000 per day",
+          "status": "Fail"
+        },
+        {
+          "fact": "High-value clients",
+          "status": "Fail"
+        },
+        {
+          "fact": "$250,000",
+          "status": "Fail"
+        }
+      ],
+      "score": 0.0
+    }
+  },
+  {
+    "id": "case_3",
+    "tool_match": true,
+    "fact_score": 1.0,
+    "details": {
+      "results": [
+        {
+          "fact": "Saving for a new car",
+          "status": "Pass"
+        },
+        {
+          "fact": "Savings",
+          "status": "Pass"
+        },
+        {
+          "fact": "$2,500.50",
+          "status": "Pass"
+        }
+      ],
+      "score": 1.0
+    }
+  },
+  {
+    "id": "case_4",
+    "tool_match": true,
+    "fact_score": 1.0,
+    "details": {
+      "results": [
+        {
+          "fact": "not found",
+          "status": "Pass"
+        },
+        {
+          "fact": "ACC-999",
+          "status": "Pass"
+        }
+      ],
+      "score": 1.0
+    }
+  }
+]

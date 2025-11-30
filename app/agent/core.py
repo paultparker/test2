@@ -4,6 +4,9 @@ from app.agent.llm import call_llm
 from app.agent.prompts import PLANNER_SYSTEM_PROMPT, VERIFIER_SYSTEM_PROMPT, FINAL_ANSWER_PROMPT
 from app.agent.tools import AVAILABLE_TOOLS
 from app.models import Plan, Step, AgentResponse
+import logging
+
+logger = logging.getLogger(__name__)
 
 def parse_json_response(response: str) -> Dict[str, Any]:
     """Helper to parse JSON from LLM response, handling potential markdown blocks."""
@@ -15,7 +18,7 @@ def parse_json_response(response: str) -> Dict[str, Any]:
             clean_response = clean_response.rsplit("```", 1)[0]
         return json.loads(clean_response)
     except Exception as e:
-        print(f"Failed to parse JSON: {response}")
+        logger.error(f"Failed to parse JSON: {response}")
         return {}
 
 class AgentCore:
@@ -23,11 +26,13 @@ class AgentCore:
         self.tools = AVAILABLE_TOOLS
 
     def plan(self, query: str) -> Plan:
+        logger.info(f"Planning for query: {query}")
         messages = [
             {"role": "system", "content": PLANNER_SYSTEM_PROMPT},
             {"role": "user", "content": query}
         ]
         response = call_llm(messages)
+        logger.debug(f"Planner raw response: {response}")
         plan_data = parse_json_response(response)
         
         steps = []
@@ -35,18 +40,24 @@ class AgentCore:
             for s in plan_data["steps"]:
                 steps.append(Step(**s))
         
+        logger.info(f"Generated plan with {len(steps)} steps")
         return Plan(steps=steps)
 
     def execute(self, plan: Plan) -> Plan:
+        logger.info("Starting plan execution")
         for step in plan.steps:
             if step.tool_name and step.tool_name in self.tools:
+                logger.info(f"Executing step {step.step_number}: {step.tool_name}")
                 tool_func = self.tools[step.tool_name]
                 try:
                     # Execute tool
                     result = tool_func(**step.tool_args)
                     step.result = result
+                    logger.info(f"Tool {step.tool_name} success")
                 except Exception as e:
-                    step.result = f"Error executing tool: {str(e)}"
+                    error_msg = f"Error executing tool: {str(e)}"
+                    step.result = error_msg
+                    logger.error(error_msg)
             else:
                 step.result = "No tool execution needed or tool not found."
         return plan
