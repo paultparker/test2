@@ -30,9 +30,25 @@ def kb_search(query: str) -> str:
     
     # Simple keyword match
     results = []
+    query_terms = query.lower().split()
     for article in kb_articles:
-        if query.lower() in article["title"].lower() or query.lower() in article["content"].lower():
+        # Check if the full query is in the text OR if significant words match
+        text = (article["title"] + " " + article["content"]).lower()
+        
+        # Match if the exact query is found
+        if query.lower() in text:
             results.append(article)
+            continue
+            
+        # Fallback: Match if all query terms (longer than 3 chars) are present
+        # This handles "wire transfers" matching "wire transfer" if we strip 's' or just match "wire" and "transfer"
+        # For simplicity in this mock, let's just check if *any* significant term matches if the full phrase fails
+        # But to be safer, let's check if the query *stem* is roughly there. 
+        # Actually, let's just check if "wire" AND "transfer" are in the text.
+        
+        if all(term.rstrip('s') in text for term in query_terms if len(term) > 3):
+             results.append(article)
+
             
     if results:
         return json.dumps(results, indent=2)
