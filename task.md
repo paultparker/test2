@@ -1,0 +1,26 @@
+# Task: Relationship Manager Co-Pilot
+
+- [x] Project Initialization
+  - [x] Create `task.md`
+  - [x] Create `implementation_plan.md`
+  - [x] Set up Python environment (requirements.txt)
+- [x] Core Agent Architecture
+  - [x] Implement Planner Agent
+  - [x] Implement Verifier Agent
+  - [x] Implement Agent Loop (Orchestrator)
+- [x] Tools Implementation (Simulated)
+  - [x] Account Lookup Tool (Simulated)
+  - [x] KB Search Tool (Simulated)
+  - [x] CRM Notes Tool (Simulated)
+- [x] API Development (FastAPI)
+  - [x] Setup FastAPI app structure
+  - [x] Create endpoints for agent interaction
+- [x] Verification
+  - [x] Test agent loop with simulated queries
+  - [x] Verify tool outputs
+    - [x] Add E2E tests (3 scenarios)
+- [x] Observability & Evaluation
+  - [x] Add structured logging
+  - [x] Create evaluation dataset
+  - [x] Implement LLM-as-a-judge eval script
+- [ ] Implement using LangChain
